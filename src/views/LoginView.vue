@@ -31,12 +31,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 87vh;
   }
 
   h2{
     margin-top: 30px;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     color: white;
     font-size: 72px;
     font-weight: 700;

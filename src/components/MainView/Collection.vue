@@ -1,16 +1,11 @@
 <script setup>
-  const selectionItems = document.querySelectorAll('.selection_item')
-
-  selectionItems.forEach(element =>{
-    const itemText = element.querySelector('.item-text')
-    element.addEventListener("mouseenter", ()=>{
-      itemText.classList.add('visible')
-    })
-    
-    element.addEventListener("mouseleave", ()=>{
-      itemText.classList.remove("visible")
-    })
-  })
+  import { ref } from 'vue'
+  const cards = [
+    {title: 'Pet Friendly', text: 'Lorem ipsum, dolor sit amet...'},
+    {title: 'Orchids', text: 'Lorem ipsum, dolor sit amet...'},
+    {title: 'Succulents', text: 'Lorem ipsum, dolor sit amet...'},
+    {title: 'Cactuses', text: 'Lorem ipsum, dolor sit amet...'}
+  ]
 </script>
 
 <template>
@@ -22,21 +17,9 @@
       <div class="selector-button" id="4">Flowers</div>
     </div>
     <div class="collection_selection">
-      <div class="selection_item">
-        <h4>Pet Friendly</h4>
-        <p class="item-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure officiis, vero aliquid odio accusamus in placeat, veritatis atque non officia at nostrum dolorem velit iusto, ea provident perferendis. Sit, architecto.</p>
-      </div>
-      <div class="selection_item">
-        <h4>Orchids</h4>
-        <p class="item-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure officiis, vero aliquid odio accusamus in placeat, veritatis atque non officia at nostrum dolorem velit iusto, ea provident perferendis. Sit, architecto.</p>
-      </div>
-      <div class="selection_item">
-        <h4>Succulents</h4>
-        <p class="item-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure officiis, vero aliquid odio accusamus in placeat, veritatis atque non officia at nostrum dolorem velit iusto, ea provident perferendis. Sit, architecto.</p>
-      </div>
-      <div class="selection_item">
-        <h4>Cactuses</h4>
-        <p class="item-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure officiis, vero aliquid odio accusamus in placeat, veritatis atque non officia at nostrum dolorem velit iusto, ea provident perferendis. Sit, architecto.</p>
+      <div class="selection_item" v-for="card in cards" >
+        <h4>{{ card.title }}</h4>
+        <p class="item-text">{{ card.text }}</p>
       </div>
     </div>
   </div>
@@ -116,8 +99,7 @@
   transition: all 0.7s;
 }
 
-.selection_item p.visible{
+.selection_item:hover .item-text{
   opacity: 1;
-  transition: all 0.7s;
 }
 </style>
