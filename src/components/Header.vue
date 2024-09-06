@@ -21,7 +21,8 @@
           <img src="../assets/img/header/search.png" alt="searchicon">
         </div>
       </div>
-      <button><RouterLink to="/login">Login</RouterLink></button>
+      <button v-if="!isLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
+      <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
   </div>
 </template>
@@ -70,7 +71,7 @@
   }
 
   .header_searchbar{
-    width: 80px;
+    width: 60px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -93,5 +94,13 @@
   .searchbar_icon{
     width: 24px;
     height: 24px;
+  }
+  .icon{
+    width: 24px;
+    height: 24px;
+  }
+  .lkButton{
+    width: 80px;
+    height: 60px;
   }
 </style>

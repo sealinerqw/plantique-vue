@@ -1,22 +1,39 @@
 <script setup>
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../main"
+import { ref } from 'vue';
 
+const email = ref('')
+const password = ref('')
+const confirmpassword = ref('')
+
+const signUp = () =>{
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((credentials) => {
+    console.log(credentials.user)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+}
 </script>
 
 <template>
   <div class="signup_container">
     <h2>Sign up</h2>
-    <form>
+    <form @submit.prevent="signUp">
       <div class="signup_input">
         <p>E-mail:</p>
-        <input type="email" for="email" required>
+        <input type="email" for="email" placeholder="E-mail" required v-model="email">
       </div>
       <div class="signup_input">
         <p>Password:</p>
-        <input type="password" for="username" required>
+        <input type="password" for="password" placeholder="Password" required v-model="password">
       </div>
       <div class="signup_input">
         <p>Confirm password:</p>
-        <input type="password" for="username" required>
+        <input type="password" for="confirm" placeholder="Confirm password" required v-model="confirmpassword">
+        <p class="error" v-if="(confirmpassword != password) && (confirmpassword !='')">Your passwords do not match!</p>
       </div>
       <button type="submit">Sign up!</button>
       <div class="signup_register">
@@ -101,5 +118,12 @@
 
   .signup_register p{
     margin-bottom: 20px;
+  }
+
+  .signup_input .error{
+    margin-top: 5px;
+    position: fixed;
+    color: crimson;
+    font-size: 14px;
   }
 </style>
