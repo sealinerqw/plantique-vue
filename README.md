@@ -1,6 +1,6 @@
 # plantique-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+E-commerce shop project made with Vue.js 3 and Firebase!
 
 ## Recommended IDE Setup
 
