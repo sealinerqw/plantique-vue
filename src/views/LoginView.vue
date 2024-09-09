@@ -1,5 +1,19 @@
 <script setup>
+  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import { ref } from "vue";
 
+  const email = ref('')
+  const password = ref('')
+
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((credentials) => {
+      const user = credentials.user
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
 </script>
 
 <template>
@@ -8,11 +22,11 @@
     <form>
       <div class="login_input">
         <p>E-mail:</p>
-        <input type="email" for="email" required>
+        <input type="email" for="email" placeholder="E-mail" required v-model="email">
       </div>
       <div class="login_input">
         <p>Password:</p>
-        <input type="password" for="username" required>
+        <input type="password" for="username" placeholder="Password" required v-model="password">
       </div>
       <button type="submit">Log in</button>
       <div class="login_register">

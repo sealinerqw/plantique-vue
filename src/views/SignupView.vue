@@ -8,8 +8,9 @@ const password = ref('')
 const confirmpassword = ref('')
 
 const signUp = () =>{
-  createUserWithEmailAndPassword(auth, email, password)
+  createUserWithEmailAndPassword(auth, email.value, password.value)
   .then((credentials) => {
+    const user = credentials.user
     console.log(credentials.user)
   })
   .catch((err) => {
@@ -29,13 +30,14 @@ const signUp = () =>{
       <div class="signup_input">
         <p>Password:</p>
         <input type="password" for="password" placeholder="Password" required v-model="password">
+        <p class="error" v-if="(password !='') && (password.length < 6)">Password should be longer than 6 characters</p>
       </div>
       <div class="signup_input">
         <p>Confirm password:</p>
         <input type="password" for="confirm" placeholder="Confirm password" required v-model="confirmpassword">
         <p class="error" v-if="(confirmpassword != password) && (confirmpassword !='')">Your passwords do not match!</p>
       </div>
-      <button type="submit">Sign up!</button>
+      <button type="submit" >Sign up!</button>
       <div class="signup_register">
         <p>Already have an account?</p>
         <button>
@@ -104,6 +106,15 @@ const signUp = () =>{
   transition: all 0.2s;
   font-size: 18px;
   font-family: 'Lufga Regular', sans-serif;
+  }
+
+  button:disabled{
+    border: 1px solid rgb(92, 92, 92);
+    color: rgb(92, 92, 92);
+  }
+  button:disabled:hover{
+    background: transparent;
+    color: rgb(92, 92, 92);
   }
 
   button:hover{
