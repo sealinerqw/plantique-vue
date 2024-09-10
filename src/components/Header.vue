@@ -1,9 +1,17 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
+import UserModal from './userModal.vue';
 
 const authStore = useAuthStore()
 
-const user = authStore.auth
+const user = authStore.user
+
+let isToggled = false
+
+const userToggle = () => {
+  isToggled = !isToggled
+}
+
 </script>
 
 <template>
@@ -25,9 +33,10 @@ const user = authStore.auth
           <img src="../assets/img/header/search.png" alt="searchicon">
         </div>
       </div>
-      <button v-if="!userLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
-      <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
+      <button v-if="user.email == ''"><RouterLink to="/login">Login</RouterLink></button>
+      <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
+    <UserModal :email='user.email' :uid="user.id" />
   </div>
 </template>
 
