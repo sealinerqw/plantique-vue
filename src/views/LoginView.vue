@@ -1,25 +1,19 @@
 <script setup>
-  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-  import { ref } from "vue";
-
+  import { ref, computed } from "vue";
+  import { useAuthStore } from "@/stores/useAuthStore";
   const email = ref('')
   const password = ref('')
-
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((credentials) => {
-      const user = credentials.user
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
+  const authStore = useAuthStore()
+  const error = computed(() => authStore.error)
+  async function login() {
+    await authStore.login(email.value, password.value)
+  }
 </script>
 
 <template>
   <div class="login_container">
     <h2>Login</h2>
-    <form>
+    <form @submit.prevent="login">
       <div class="login_input">
         <p>E-mail:</p>
         <input type="email" for="email" placeholder="E-mail" required v-model="email">
@@ -28,6 +22,7 @@
         <p>Password:</p>
         <input type="password" for="username" placeholder="Password" required v-model="password">
       </div>
+      <p class="error" v-if="error">{{ error }}</p>
       <button type="submit">Log in</button>
       <div class="login_register">
         <p>Don't have an account?</p>
@@ -111,5 +106,9 @@
   }
   .login_register p{
     margin-bottom: 20px;
+  }
+
+  .error{
+    color: crimson;
   }
 </style>

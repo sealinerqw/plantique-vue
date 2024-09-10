@@ -1,28 +1,35 @@
 <script setup>
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from "../main"
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/useAuthStore';
 
+const authStore = useAuthStore()
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 const confirmpassword = ref('')
 
-const signUp = () =>{
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-  .then((credentials) => {
-    const user = credentials.user
-    console.log(credentials.user)
-  })
-  .catch((err) => {
-    console.log(err.message)
-  })
+const error = computed(() => authStore.error)
+
+async function register(){
+  await authStore.register(email.value, password.value)
 }
+
+// const signUp = () =>{
+//   createUserWithEmailAndPassword(auth, email.value, password.value)
+//   .then((credentials) => {
+//     const user = credentials.user
+//   })
+//   .catch((err) => {
+//     console.log(err.message)
+//   })
+// }
 </script>
 
 <template>
   <div class="signup_container">
     <h2>Sign up</h2>
-    <form @submit.prevent="signUp">
+    <form @submit.prevent="register">
       <div class="signup_input">
         <p>E-mail:</p>
         <input type="email" for="email" placeholder="E-mail" required v-model="email">
@@ -37,7 +44,8 @@ const signUp = () =>{
         <input type="password" for="confirm" placeholder="Confirm password" required v-model="confirmpassword">
         <p class="error" v-if="(confirmpassword != password) && (confirmpassword !='')">Your passwords do not match!</p>
       </div>
-      <button type="submit" >Sign up!</button>
+      <button type="submit" :disabled="(confirmpassword != password) || (password === '')">Sign up!</button>
+      <p class="error" v-if="error">{{error}}</p>
       <div class="signup_register">
         <p>Already have an account?</p>
         <button>
@@ -136,5 +144,8 @@ const signUp = () =>{
     position: fixed;
     color: crimson;
     font-size: 14px;
+  }
+  .error{
+    color: crimson;
   }
 </style>

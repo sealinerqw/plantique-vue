@@ -1,5 +1,9 @@
 <script setup>
+import { useAuthStore } from '@/stores/useAuthStore';
 
+const authStore = useAuthStore()
+
+const user = authStore.auth
 </script>
 
 <template>
@@ -21,7 +25,7 @@
           <img src="../assets/img/header/search.png" alt="searchicon">
         </div>
       </div>
-      <button v-if="!isLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
+      <button v-if="!userLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
   </div>
