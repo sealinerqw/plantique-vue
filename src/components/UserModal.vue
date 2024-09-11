@@ -1,21 +1,45 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
-
+import { ref, onMounted, onUnmounted } from 'vue';
 const props = defineProps(['email', 'uid'])
+
+const emit = defineEmits(['clickOutside']);
 
 const authStore = useAuthStore()
 
+const logoutClick = () =>{
+  authStore.logout()
+  emit('clickOutside')
+}
+
+const modalRef = ref(null);
+
+// Function to handle click outside
+const handleClickOutside = (event) => {
+  if (modalRef.value && !modalRef.value.contains(event.target)) {
+    event.stopPropagation()
+    emit('clickOutside');
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('mousedown', handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('mousedown', handleClickOutside);
+});
 </script>
 
 <template>
-  <div class="modal_contaier">
+  <div class="modal_contaier" ref="modalRef">
     <div class="modal_user">
       <h4 class="email">{{ email }}</h4>
       <p class="uid">UID: {{ uid }}</p>
     </div>
     <div class="modal_controls">
       <button><RouterView>Account details</RouterView></button>
-      <button @click="logout" class="logout">Log out</button>
+      <button @click="logoutClick" class="logout">Log out</button>
     </div>
   </div>
 </template>
@@ -29,7 +53,7 @@ const authStore = useAuthStore()
     display: flex;
     flex-direction: column;
     padding: 5px;
-    border: 2px solid black;
+    border: 2px solid rgb(0, 102, 116);
   }
 
   .modal_user{

@@ -7,6 +7,7 @@ import router from '@/router/index.js'
 export const useAuthStore = defineStore('authStore',{
   state: () => ({
     error: null,
+    isLoggedIn: false,
     user:{
 
     }
@@ -35,17 +36,21 @@ export const useAuthStore = defineStore('authStore',{
     },
 
     async logout(){
-
+      await signOut(auth)
+      this.user.email = ''
+      this.user.uid = ''
     },
 
     init(){
       onAuthStateChanged(auth, (user) =>{
         if (user){
+          this.isLoggedIn = true
           this.user.id = user.uid
           this.user.email = user.email
           router.push('/')
         }
         else{
+          this.isLoggedIn = false
           this.user = {}
           router.push('/login')
         }

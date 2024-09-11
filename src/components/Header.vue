@@ -1,11 +1,10 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
 import UserModal from './UserModal.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const authStore = useAuthStore()
-
-const user = authStore.user
+const user = computed(() => authStore.user) 
 
 let isToggled = ref(false)
 
@@ -13,6 +12,9 @@ const userToggle = () => {
   isToggled.value = !isToggled.value
 }
 
+const closeUser = () => {
+  isToggled.value = false
+}
 </script>
 
 <template>
@@ -34,12 +36,12 @@ const userToggle = () => {
           <img src="../assets/img/header/search.png" alt="searchicon">
         </div>
       </div>
-      <button v-if="user.email == ''"><RouterLink to="/login">Login</RouterLink></button>
+      <button v-if="!authStore.isLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
     <transition name="modal-fade">
       <div class="user_info" v-if='isToggled'>
-        <UserModal :email="user.email" :uid ="user.id" />
+        <UserModal :email="user.email" :uid ="user.id" @clickOutside="closeUser" />
       </div>
     </transition>
   </div>
