@@ -1,15 +1,16 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
-import UserModal from './userModal.vue';
+import UserModal from './UserModal.vue';
+import { ref } from 'vue';
 
 const authStore = useAuthStore()
 
 const user = authStore.user
 
-let isToggled = false
+let isToggled = ref(false)
 
 const userToggle = () => {
-  isToggled = !isToggled
+  isToggled.value = !isToggled.value
 }
 
 </script>
@@ -36,7 +37,11 @@ const userToggle = () => {
       <button v-if="user.email == ''"><RouterLink to="/login">Login</RouterLink></button>
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
-    <UserModal :email='user.email' :uid="user.id" />
+    <transition name="modal-fade">
+      <div class="user_info" v-if='isToggled'>
+        <UserModal :email="user.email" :uid ="user.id" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -115,5 +120,19 @@ const userToggle = () => {
   .lkButton{
     width: 80px;
     height: 60px;
+  }
+  .user_info{
+    position: fixed;
+    right: 1rem;
+    top: 6rem;
+  }
+
+  .modal-fade-enter-active, .modal-fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .modal-fade-enter-from, .modal-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-20px);
   }
 </style>
