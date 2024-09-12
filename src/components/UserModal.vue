@@ -21,7 +21,7 @@ const logoutClick = () =>{
       <p class="uid">UID: {{ uid }}</p>
     </div>
     <div class="modal_controls">
-      <button><RouterLink to="/user/:id">Account details</RouterLink></button>
+      <button><RouterLink :to="{name: 'profile'}">Account details</RouterLink></button>
       <button @click="logoutClick" class="logout">Log out</button>
     </div>
   </div>
@@ -63,16 +63,8 @@ const logoutClick = () =>{
   }
 
   button{
-    width: 170px;
-    height: 60px;
-    border-radius: 60px;
-    background: transparent;
     border: 1px solid black;
     color: black;
-    font-weight: 400;
-    transition: all 0.2s;
-    font-size: 18px;
-    font-family: 'Lufga Regular', sans-serif;
   }
 
   button:hover{

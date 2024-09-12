@@ -72,18 +72,6 @@ const closeUser = () =>{
     display: flex;
     gap: 5px;
   }
-  .navcluster_buttons button{
-    width: 170px;
-    height: 60px;
-    border-radius: 60px;
-    background: transparent;
-    border: 1px solid white;
-    color: white;
-    font-weight: 400;
-    transition: all 0.2s;
-    font-size: 18px;
-    font-family: 'Lufga Regular', sans-serif;
-  }
 
   .navcluster_buttons button:hover{
     background: white;

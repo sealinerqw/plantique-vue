@@ -47,7 +47,7 @@ export const useAuthStore = defineStore('authStore',{
           this.isLoggedIn = true
           this.user.id = user.uid
           this.user.email = user.email
-          router.push('/')
+          this.user.displayName = user.displayName
         }
         else{
           this.isLoggedIn = false

@@ -63,14 +63,6 @@ async function register(){
     align-items: center;
   }
 
-  h2{
-    margin-top: 50px;
-    margin-bottom: 1rem;
-    color: white;
-    font-size: 72px;
-    font-weight: 700;
-  }
-
   form{
     width: 25%;
     color: white;
@@ -90,30 +82,6 @@ async function register(){
     margin-bottom: 15px;
     font-size: 28px;
     font-family: 'Lufga SemiBold', sans-serif;
-  }
-
-  .signup_input input{
-    border: 0;
-    background: transparent;
-    border-bottom: 2px solid var(--bg-white);
-    width: 100%;
-    color: white;
-    font-size: 24px;
-    caret-color: white;
-    font-family: 'Lufga Regular', sans-serif;
-  }
-
-  button{
-  width: 170px;
-  height: 60px;
-  border-radius: 60px;
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  font-weight: 400;
-  transition: all 0.2s;
-  font-size: 18px;
-  font-family: 'Lufga Regular', sans-serif;
   }
 
   button:disabled{

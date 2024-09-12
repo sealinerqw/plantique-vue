@@ -42,14 +42,6 @@
     align-items: center;
   }
 
-  h2{
-    margin-top: 30px;
-    margin-bottom: 3rem;
-    color: white;
-    font-size: 72px;
-    font-weight: 700;
-  }
-
   form{
     width: 25%;
     color: white;
@@ -80,19 +72,6 @@
     font-size: 24px;
     caret-color: white;
     font-family: 'Lufga Regular', sans-serif;
-  }
-
-  button{
-  width: 170px;
-  height: 60px;
-  border-radius: 60px;
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  font-weight: 400;
-  transition: all 0.2s;
-  font-size: 18px;
-  font-family: 'Lufga Regular', sans-serif;
   }
 
   button:hover{
