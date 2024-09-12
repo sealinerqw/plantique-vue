@@ -12,40 +12,23 @@ const logoutClick = () =>{
   emit('clickOutside')
 }
 
-const modalRef = ref(null);
-
-// Function to handle click outside
-const handleClickOutside = (event) => {
-  if (modalRef.value && !modalRef.value.contains(event.target)) {
-    event.stopPropagation()
-    emit('clickOutside');
-  }
-};
-
-onMounted(() => {
-  document.addEventListener('mousedown', handleClickOutside);
-});
-
-onUnmounted(() => {
-  document.removeEventListener('mousedown', handleClickOutside);
-});
 </script>
 
 <template>
-  <div class="modal_contaier" ref="modalRef">
+  <div class="modal_container" ref="modalRef">
     <div class="modal_user">
       <h4 class="email">{{ email }}</h4>
       <p class="uid">UID: {{ uid }}</p>
     </div>
     <div class="modal_controls">
-      <button><RouterView>Account details</RouterView></button>
+      <button><RouterLink to="/user/:id">Account details</RouterLink></button>
       <button @click="logoutClick" class="logout">Log out</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .modal_contaier{
+  .modal_container{
     background: var(--bg-white);
     width: 350px;
     border-radius: 24px;

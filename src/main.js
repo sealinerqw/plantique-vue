@@ -8,6 +8,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import vClickOutside from 'click-outside-vue3'
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
@@ -34,5 +36,6 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(vClickOutside)
 
 app.mount('#app')

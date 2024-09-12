@@ -8,13 +8,17 @@ const user = computed(() => authStore.user)
 
 let isToggled = ref(false)
 
-const userToggle = () => {
+const userToggle = (event) => {
+  event.stopPropagation()
   isToggled.value = !isToggled.value
 }
 
-const closeUser = () => {
-  isToggled.value = false
+const closeUser = () =>{
+  if(isToggled.value){
+    isToggled.value = false
+  }
 }
+
 </script>
 
 <template>
@@ -40,8 +44,8 @@ const closeUser = () => {
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
     </div>
     <transition name="modal-fade">
-      <div class="user_info" v-if='isToggled'>
-        <UserModal :email="user.email" :uid ="user.id" @clickOutside="closeUser" />
+      <div class="user_info" v-if='isToggled' v-click-outside="closeUser">
+        <UserModal :email="user.email" :uid ="user.id" @clickOutside = 'closeUser'/>
       </div>
     </transition>
   </div>
