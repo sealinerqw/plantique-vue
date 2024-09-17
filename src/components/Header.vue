@@ -45,7 +45,7 @@ const closeUser = () =>{
     </div>
     <transition name="modal-fade">
       <div class="user_info" v-if='isToggled' v-click-outside="closeUser">
-        <UserModal :email="user.email" :uid ="user.id" @clickOutside = 'closeUser'/>
+        <UserModal :email="user.email" :uid ="user.uid" @clickOutside = 'closeUser'/>
       </div>
     </transition>
   </div>

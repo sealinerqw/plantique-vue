@@ -17,11 +17,12 @@ const logoutClick = () =>{
 <template>
   <div class="modal_container" ref="modalRef">
     <div class="modal_user">
+      <img :src="authStore.user.photoURL" alt="">
       <h4 class="email">{{ email }}</h4>
       <p class="uid">UID: {{ uid }}</p>
     </div>
     <div class="modal_controls">
-      <button><RouterLink :to="{name: 'profile'}">Account details</RouterLink></button>
+      <button @click="emit('clickOutside')"><RouterLink :to="{name: 'profile'}">Account details</RouterLink></button>
       <button @click="logoutClick" class="logout">Log out</button>
     </div>
   </div>

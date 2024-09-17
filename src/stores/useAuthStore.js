@@ -8,9 +8,7 @@ export const useAuthStore = defineStore('authStore',{
   state: () => ({
     error: null,
     isLoggedIn: false,
-    user:{
-
-    }
+    user: null
   }),
   actions: {
     async register(email, password){
@@ -37,21 +35,17 @@ export const useAuthStore = defineStore('authStore',{
 
     async logout(){
       await signOut(auth)
-      this.user.email = ''
-      this.user.uid = ''
     },
 
     init(){
       onAuthStateChanged(auth, (user) =>{
         if (user){
           this.isLoggedIn = true
-          this.user.id = user.uid
-          this.user.email = user.email
-          this.user.displayName = user.displayName
+          this.user = user
         }
         else{
           this.isLoggedIn = false
-          this.user = {}
+          this.user = null
           router.push('/login')
         }
       })

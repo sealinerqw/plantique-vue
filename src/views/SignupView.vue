@@ -14,16 +14,6 @@ const error = computed(() => authStore.error)
 async function register(){
   await authStore.register(email.value, password.value)
 }
-
-// const signUp = () =>{
-//   createUserWithEmailAndPassword(auth, email.value, password.value)
-//   .then((credentials) => {
-//     const user = credentials.user
-//   })
-//   .catch((err) => {
-//     console.log(err.message)
-//   })
-// }
 </script>
 
 <template>
