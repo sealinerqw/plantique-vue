@@ -36,16 +36,20 @@ export const useAuthStore = defineStore('authStore',{
     async logout(){
       await signOut(auth)
     },
-
+    
     init(){
       onAuthStateChanged(auth, (user) =>{
+        let userData = {id: user.uid, email: user.email, username: user.displayName, profilePicture: user.photoURL }
+
         if (user){
           this.isLoggedIn = true
           this.user = user
+          sessionStorage.setItem('user', JSON.stringify(userData))
         }
         else{
           this.isLoggedIn = false
           this.user = null
+          sessionStorage.removeItem('user')
           router.push('/login')
         }
       })

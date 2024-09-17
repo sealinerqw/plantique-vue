@@ -1,11 +1,20 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/useAuthStore';
-
 const authStore = useAuthStore()
+let user = sessionStorage.getItem('user')
+const pfpURL = ref('')
+const router = useRouter()
+if (user){
+  user = JSON.parse(user)
+} else
+{
+  router.push('/login')
+}
+const updateUserImage = () =>{
 
-const user = authStore.user
-
+}
 </script>
 
 <template>
@@ -13,6 +22,7 @@ const user = authStore.user
   <div class="profile_container">
     <div class="profile_picture">
       <img src='../assets/img/profile/userdefault.png' alt="">
+      <input type="text" v-model="pfpURL">
       <div class="picture_controls">
         <button @click="updateUserImage">Update image</button>
         <button>Remove image</button>
