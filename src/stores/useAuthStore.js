@@ -39,9 +39,8 @@ export const useAuthStore = defineStore('authStore',{
     
     init(){
       onAuthStateChanged(auth, (user) =>{
-        let userData = {id: user.uid, email: user.email, username: user.displayName, profilePicture: user.photoURL }
-
         if (user){
+          let userData = {id: user.uid, email: user.email, username: user.displayName, profilePicture: user.photoURL }
           this.isLoggedIn = true
           this.user = user
           sessionStorage.setItem('user', JSON.stringify(userData))
@@ -49,7 +48,7 @@ export const useAuthStore = defineStore('authStore',{
         else{
           this.isLoggedIn = false
           this.user = null
-          sessionStorage.removeItem('user')
+          sessionStorage.clear()
           router.push('/login')
         }
       })

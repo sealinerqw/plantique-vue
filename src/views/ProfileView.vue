@@ -1,27 +1,44 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/useAuthStore';
-const authStore = useAuthStore()
+import { auth } from '@/main';
+
 let user = sessionStorage.getItem('user')
 const pfpURL = ref('')
+const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
 const router = useRouter()
+const defaultImage = "../assets/img/profile/userdefault.png"
+
 if (user){
   user = JSON.parse(user)
 } else
 {
   router.push('/login')
 }
-const updateUserImage = () =>{
 
+const profilePicture = () =>{
+  if(user.profilePicture){
+    return user.profilePicture
+  } else
+  return defaultImage
 }
+
+console.log(profilePicture())
+const updateUserImage = () =>{
+  if(pfpURL != '' && urlRegex.test(pfpURL) == true){
+    auth.currentUser.updateProfile({
+      photoURL: pfpURL
+    })
+  } else alert('Empty new photo URL')
+}
+
 </script>
 
 <template>
   <h2>Profile</h2>
   <div class="profile_container">
     <div class="profile_picture">
-      <img src='../assets/img/profile/userdefault.png' alt="">
+      <img :src='profilePicture()' alt="" :key="user.profilePicture">
       <input type="text" v-model="pfpURL">
       <div class="picture_controls">
         <button @click="updateUserImage">Update image</button>
