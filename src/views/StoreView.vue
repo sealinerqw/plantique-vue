@@ -6,7 +6,7 @@
   <div class="store_container">
     <h2>Store</h2>
     <div class="store_filters">
-      a
+      todo: filters here
     </div>
     <div class="store_items">
       <div class="placeholder">

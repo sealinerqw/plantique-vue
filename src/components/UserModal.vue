@@ -1,6 +1,5 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
-import { ref, onMounted, onUnmounted } from 'vue';
 const props = defineProps(['email', 'uid'])
 
 const emit = defineEmits(['clickOutside']);
@@ -17,7 +16,6 @@ const logoutClick = () =>{
 <template>
   <div class="modal_container" ref="modalRef">
     <div class="modal_user">
-      <img :src="authStore.user.photoURL" alt="">
       <h4 class="email">{{ email }}</h4>
       <p class="uid">UID: {{ uid }}</p>
     </div>
