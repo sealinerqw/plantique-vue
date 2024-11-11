@@ -28,7 +28,7 @@ const closeUser = () =>{
         <img src="../assets/img/header/logo.png" alt="logo">
       </div>
       <div class="navcluster_buttons">
-        <!-- change to routerview when ready -->
+        <!-- change routerlinks when ready -->
         <button><RouterLink to="/">Home</RouterLink></button>
         <button><RouterLink to="/store">Store</RouterLink></button>
         <button><RouterLink to="/">Idk</RouterLink></button>
@@ -72,16 +72,6 @@ const closeUser = () =>{
     display: flex;
     gap: 5px;
   }
-
-  .navcluster_buttons button:hover{
-    background: white;
-    color: black;
-  }
-  .navcluster_buttons button:focus{
-    background: white;
-    color: black;
-  }
-
   .header_searchbar{
     width: 60px;
     height: 60px;

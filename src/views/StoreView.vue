@@ -1,4 +1,6 @@
 <script setup>
+import ProductCard from '@/components/StoreView/ProductCard.vue';
+
 
 </script>
 
@@ -9,7 +11,8 @@
       todo: filters here
     </div>
     <div class="store_items">
-      <div class="placeholder">
+      <ProductCard />
+      <!-- <div class="placeholder">
         placeholder
       </div>
       <div class="placeholder">
@@ -23,7 +26,7 @@
       </div>
       <div class="placeholder">
         placeholder
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

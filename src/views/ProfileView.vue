@@ -6,7 +6,6 @@ import { auth } from '@/main';
 let user = ref(JSON.parse(sessionStorage.getItem('user'))) 
 const pfpURL = ref('')
 const urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-const router = useRouter()
 const defaultImage = "/assets/img/profile/userdefault.png"
 
 const profilePicture = computed(() =>{
