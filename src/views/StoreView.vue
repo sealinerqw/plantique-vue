@@ -1,7 +1,10 @@
 <script setup>
 import ProductCard from '@/components/StoreView/ProductCard.vue';
+import getStoreItems from '../composables/getStoreItems.js'
 
+const products = getStoreItems()
 
+console.log(products)
 </script>
 
 <template>
@@ -11,22 +14,7 @@ import ProductCard from '@/components/StoreView/ProductCard.vue';
       todo: filters here
     </div>
     <div class="store_items">
-      <ProductCard />
-      <!-- <div class="placeholder">
-        placeholder
-      </div>
-      <div class="placeholder">
-        placeholder
-      </div>
-      <div class="placeholder">
-        placeholder
-      </div>
-      <div class="placeholder">
-        placeholder
-      </div>
-      <div class="placeholder">
-        placeholder
-      </div> -->
+      <ProductCard/>
     </div>
   </div>
 </template>

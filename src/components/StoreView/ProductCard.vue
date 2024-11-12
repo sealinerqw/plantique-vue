@@ -1,10 +1,11 @@
 <script setup>
   const props = defineProps('itemId', 'itemImage', 'itemPrice', 'itemName')
+  let imageURL = props.itemImage
 </script>
 
 <template>
   <div class="product__container">
-    <div class="product_image" src=""></div>
+    <div class="product_image" :src="imageURL"></div>
     <div class="product_info">
       <div class="product_name">{{ itemName }}</div>
       <div class="product_price">{{ itemPrice }} ₽</div>

@@ -33,10 +33,9 @@ body{
 
 #app{
   margin-top: 5px;
-  height: auto !important; /* real browsers */
-  min-height: 100%; /* real browsers */
+  height: auto !important;
+  min-height: 100%;
   font-family: 'Lufga Regular', sans-serif;
-  /* background-color: #f5f5f5; */
   border-radius: var(--default-radius);
   backdrop-filter: blur(15px);
   width: 1420px;
