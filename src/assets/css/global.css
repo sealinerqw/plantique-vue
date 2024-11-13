@@ -40,6 +40,7 @@ body{
   backdrop-filter: blur(15px);
   width: 1420px;
   border: 5px solid var(--bg-white);
+  overflow: hidden;
 } 
 
 a{

@@ -1,10 +1,15 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
-import getStoreItems from '../composables/getStoreItems.js'
+import getStoreItems from '../composables/getStoreItems.js';
 
-const products = getStoreItems()
+const products = ref([]);
 
-console.log(products)
+onMounted(async () => {
+  products.value = await getStoreItems();
+  console.log(products.value);
+});
+
 </script>
 
 <template>
@@ -14,7 +19,14 @@ console.log(products)
       todo: filters here
     </div>
     <div class="store_items">
-      <ProductCard/>
+      <ProductCard 
+        v-for="product in products" 
+        :key="product.id"
+        :itemId="product.id" 
+        :itemImage="product.imageURL" 
+        :itemPrice="product.price" 
+        :itemName="product.name" 
+      />
     </div>
   </div>
 </template>
@@ -27,7 +39,8 @@ console.log(products)
     border-top-left-radius: var(--default-radius);
     border-top-right-radius: var(--default-radius);
     text-align: center;
-    height: max-content;
+    height: fit-content;
+    min-height: 100%;
   }
   h2{
     color: black;
@@ -44,15 +57,8 @@ console.log(products)
     padding: 20px;
     display: flex;  
     flex-wrap: wrap;
+    gap: 20px;
     align-items: center;
     justify-content: center;
-  }
-  .placeholder{
-    height: 400px;
-    width: 300px;
-    border-radius: var(--default-radius);
-    background-color: gray;
-    text-align: center;
-    margin: 10px;
   }
 </style>
