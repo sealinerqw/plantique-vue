@@ -90,12 +90,18 @@ button{
   font-size: 18px;
   font-family: 'Lufga Regular', sans-serif;
 }
-
+button.black{
+  border: 1px solid black;
+  color: black;
+}
 button:hover{
   background: white;
   color: black;
 }
-
+button.black:hover{
+  background: black;
+  color: white;
+}
 button:focus{
   background: white;
   color: black;

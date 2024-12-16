@@ -3,11 +3,10 @@ import { ref, onMounted } from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
 import getStoreItems from '../composables/getStoreItems.js';
 
-const products = ref([]);
+const products = ref([])
 
 onMounted(async () => {
-  products.value = await getStoreItems();
-  console.log(products.value);
+  products.value = await getStoreItems()
 });
 
 </script>

@@ -17,7 +17,7 @@
         <div class="product_name">{{ props.itemName }}</div>
         <div class="product_price">{{ props.itemPrice }} ₽</div>
       </div>
-      <button><RouterView>Buy</RouterView></button>
+      <button><RouterLink :to="{name: 'storeitem', params: {id: itemId}}">Buy</RouterLink></button>
     </div>
   </div>
 </template>

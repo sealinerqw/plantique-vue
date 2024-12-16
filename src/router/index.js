@@ -5,6 +5,7 @@ import SignupView from '@/views/SignupView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import StoreView from '@/views/StoreView.vue'
 import NotFound from '@/components/NotFound.vue'
+import StoreItemView from '@/views/StoreItemView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,12 @@ const router = createRouter({
       path: '/store',
       name: 'store',
       component: StoreView
+    },
+    {
+      path: '/store/:id',
+      name: 'storeitem',
+      props: true,
+      component: StoreItemView
     },
     // 404 redirect
     {
