@@ -1,23 +1,25 @@
 <script setup>
-// import getSingleStoreItem from '@/composables/getSingleStoreItem.js'
-import StoreItem from '@/components/StoreItemView/StoreItem.vue';
-// import { ref, onMounted, computed } from 'vue';
+import getSingleStoreItem from '@/composables/getSingleStoreItem.js'
+import { ref, onMounted, computed } from 'vue';
 
-// const item = ref()
-// let itemTags = ref([])
+const item = ref()
+let itemTags = ref([])
+const props = defineProps({
+	id: Number
+})
 
-// onMounted(async () =>{
-// 	item.value = await getSingleStoreItem(props.id)
-//   if(item.value && item.value.tags){
-//     itemTags = item.value.tags.split(',').map(tag => tag.trim())
-//   }
-// })
+onMounted(async () =>{
+	item.value = await getSingleStoreItem(props.id)
+  if(item.value && item.value.tags){
+    itemTags = item.value.tags.split(',').map(tag => tag.trim())
+  }
+  console.log(item.photoURL)
+})
+
 </script>
 
 <template>
-	<div class="storeItem_container">
-    <StoreItem :id="id"></StoreItem>
-    <!-- <div class="storeItem_item" v-if="item">
+    <div class="storeItem_item" v-if="item">
       <div class="item_image">
         <img :src="item.imageURL" :alt="item.name">
       </div>
@@ -39,29 +41,14 @@ import StoreItem from '@/components/StoreItemView/StoreItem.vue';
           <div class="item_tag"  v-for="tag in itemTags">{{ tag }}</div>
         </div>
       </div>
-      
     </div>
     <div class="loading" v-else>
     Loading...
-    </div> -->
-	</div>
-  
+    </div>
 </template>
 
 <style scoped>
-	.storeItem_container{
-    border: 1px solid var(--bg-white);
-    background: var(--bg-white);
-    border-top-left-radius: var(--default-radius);
-    border-top-right-radius: var(--default-radius);
-    height: fit-content;
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* .storeItem_title{
+  .storeItem_title{
     font-size: 48px;
   }
 
@@ -121,5 +108,5 @@ import StoreItem from '@/components/StoreItemView/StoreItem.vue';
     border-radius: var(--default-radius);
     padding: 5px;
     background: #cacaca;
-  } */
+  }
 </style>
