@@ -1,6 +1,6 @@
 <script setup>
 import getSingleStoreItem from '@/composables/getSingleStoreItem.js'
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const item = ref()
 let itemTags = ref([])
@@ -33,13 +33,13 @@ onMounted(async () =>{
         <div class="item_text">
           {{ item.details }}
         </div>
-        <div class="item_price">
-          {{ item.price }}
-        </div>
-        <button class="black">Add to cart!</button>
         <div class="item_tags">
           <div class="item_tag"  v-for="tag in itemTags">{{ tag }}</div>
         </div>
+      </div>
+      <div class="item_price">
+        <span>{{ item.price }}</span>
+        <button class="black">Add to cart!</button>
       </div>
     </div>
     <div class="loading" v-else>
@@ -59,15 +59,14 @@ onMounted(async () =>{
     width: 100%;
     text-align: right;
     justify-content: space-between;
-    margin: 60px;
+    margin-left: 60px;
+    margin-right: 60px;
   }
 
   .item_details{
     min-width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
   }
 
   .item_image{
@@ -94,12 +93,24 @@ onMounted(async () =>{
     border-bottom: 2px solid #919191;
     margin-bottom: 10px;
   }
+  .item_price{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    height: 100%;
+  }
+
+  .item_price{
+    font-size: 30px;
+    font-weight: 900;
+  }
 
   .item_tags{
     display: flex;
-    flex-direction: row;
-    flex-wrap: 1;
+    flex-wrap: wrap;
     gap: 10px;
+    align-self: flex-end;
   }
 
   .item_tag{

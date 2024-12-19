@@ -17,8 +17,8 @@ onMounted(async () => {
     <div class="store_filters">
       todo: filters here
     </div>
-    <div class="store_items">
-      <ProductCard 
+    <div class="store_items" v-if="products">
+      <ProductCard
         v-for="product in products" 
         :key="product.id"
         :itemId="product.id" 
@@ -27,6 +27,7 @@ onMounted(async () => {
         :itemName="product.name" 
       />
     </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
