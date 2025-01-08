@@ -35,13 +35,14 @@ const closeUser = () =>{
       </div>
     </div>
     <div class="navcluster_buttons">
-      <div class="header_searchbar">
+      <!-- <div class="header_searchbar">
         <div class="searchbar_icon">
           <img src="../assets/img/header/search.png" alt="searchicon">
         </div>
-      </div>
+      </div> -->
       <button v-if="!authStore.isLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
+      <button v-if="authStore.isLoggedIn">Cart</button>
     </div>
     <transition name="modal-fade">
       <div class="user_info" v-if='isToggled' v-click-outside="closeUser">
@@ -72,7 +73,7 @@ const closeUser = () =>{
     display: flex;
     gap: 5px;
   }
-  .header_searchbar{
+  /* .header_searchbar{
     width: 60px;
     height: 60px;
     display: flex;
@@ -81,7 +82,7 @@ const closeUser = () =>{
     border-radius: 60px;
     border: 1px solid white;
     background: transparent;
-  }
+  } */
 
   /* .header_searchbar input{
     width: 320px;
@@ -92,11 +93,11 @@ const closeUser = () =>{
     background: transparent;
     caret-color: white;
   } */
-
+/* 
   .searchbar_icon{
     width: 24px;
     height: 24px;
-  }
+  } */
   .icon{
     width: 24px;
     height: 24px;

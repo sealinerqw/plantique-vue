@@ -22,7 +22,7 @@
           <img src="../../assets/img/icons/arrow.png" alt="arrow">
         </div>
         <div class="buttons-shopbutton">
-          <button><RouterLink to="shop">Shop Tropical Plants</RouterLink></button>
+          <button><RouterLink to="store">Shop Tropical Plants</RouterLink></button>
         </div>
       </div>
     </div>
