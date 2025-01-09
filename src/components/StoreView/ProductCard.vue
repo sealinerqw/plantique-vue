@@ -6,20 +6,21 @@
   itemName: String
 });
 
-  let imageURL = props.itemImage
+let imageURL = props.itemImage
 </script>
 
 <template>
+  <RouterLink :to="{name: 'storeitem', params: {id: itemId}}">
   <div class="product_container">
     <img class="product_image" :src="imageURL">
     <div class="product_info">
       <div class="product_text">
         <div class="product_name">{{ props.itemName }}</div>
-        <div class="product_price">{{ props.itemPrice }} ₽</div>
       </div>
-      <button><RouterLink :to="{name: 'storeitem', params: {id: itemId}}">Buy</RouterLink></button>
+      <button class="black" @click.stop.prevent="">{{ props.itemPrice }} ₽</button>
     </div>
   </div>
+  </RouterLink>
 </template>
 
 
@@ -29,16 +30,22 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    background: #878787;
+    background: var(--bg-white);
+    border: 1px solid rgb(105, 105, 105);
     width: 250px;
-    height: 380px;
+    height: 450px;
     border-radius: calc(var(--default-radius) - 1rem);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.4);
+    transition: all 0.2s;
   }
 
+  .product_container:hover{
+    transform: scale(1.025);
+  }
   .product_image{
     border-top-left-radius: calc(var(--default-radius) - 1.5rem);
     border-top-right-radius: calc(var(--default-radius) - 1.5rem);
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     height: 100%;
   }
@@ -53,8 +60,8 @@
   }
 
   .product_text{
-    color: white;
-    text-align-last: right;
+    text-align: left;
+    text-wrap: wrap;
   }
 
   .product_name{

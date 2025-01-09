@@ -61,4 +61,7 @@ onMounted(async () => {
     align-items: center;
     justify-content: center;
   }
+  a{
+    box-sizing: content-box;
+  }
 </style>
