@@ -1,21 +1,24 @@
 <script setup>
-import getSingleStoreItem from '@/composables/getSingleStoreItem.js'
+import { useCartStore } from '@/stores/useCartStore';
 import { ref, onMounted } from 'vue';
 
+const productStore = useCartStore()
 const item = ref()
-let itemTags = ref([])
+const itemTags = ref([])
+
 const props = defineProps({
 	id: Number
 })
 
 onMounted(async () =>{
-	item.value = await getSingleStoreItem(props.id)
-  if(item.value && item.value.tags){
-    itemTags = item.value.tags.split(',').map(tag => tag.trim())
+  if(!productStore.singleProduct){
+    item.value = await productStore.getSingleProduct(props.id)
   }
-  console.log(item.photoURL)
-})
 
+  if(item.value && item.value.tags){
+    itemTags.value = item.value.tags.split(',').map(tag => tag.trim())
+  }
+})
 </script>
 
 <template>
