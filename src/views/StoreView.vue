@@ -1,12 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted} from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
-import getStoreItems from '../composables/getStoreItems.js';
+import { useCartStore } from '@/stores/useCartStore.js';
 
-const products = ref([])
+const productStore = useCartStore()
 
 onMounted(async () => {
-  products.value = await getStoreItems()
+  if(!productStore.products){
+    await productStore.getProducts()
+  }
 });
 
 </script>
@@ -17,9 +19,9 @@ onMounted(async () => {
     <div class="store_filters">
       todo: filters here
     </div>
-    <div class="store_items" v-if="products">
+    <div class="store_items" v-if="productStore.products">
       <ProductCard
-        v-for="product in products" 
+        v-for="product in productStore.products" 
         :key="product.id"
         :itemId="product.id" 
         :itemImage="product.imageURL" 
