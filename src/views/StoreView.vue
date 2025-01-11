@@ -4,10 +4,12 @@ import ProductCard from '@/components/StoreView/ProductCard.vue';
 import { useCartStore } from '@/stores/useCartStore.js';
 
 const productStore = useCartStore()
+const productTags = ref([])
 
 onMounted(async () => {
   if(!productStore.products){
     await productStore.getProducts()
+    console.log(productStore.products)
   }
 });
 
@@ -27,6 +29,7 @@ onMounted(async () => {
         :itemImage="product.imageURL" 
         :itemPrice="product.price" 
         :itemName="product.name" 
+        :itemTags ="product.tags"
       />
     </div>
     <div v-else>Loading...</div>
