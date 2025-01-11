@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted} from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
-import { useCartStore } from '@/stores/useCartStore.js';
+import { useProductStore } from '@/stores/useProductStore.js';
 
-const productStore = useCartStore()
+const productStore = useProductStore()
 const productTags = ref([])
 
 onMounted(async () => {
@@ -29,7 +29,7 @@ onMounted(async () => {
         :itemImage="product.imageURL" 
         :itemPrice="product.price" 
         :itemName="product.name" 
-        :itemTags ="product.tags"
+        :itemTags="product.tags"
       />
     </div>
     <div v-else>Loading...</div>

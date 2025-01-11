@@ -1,8 +1,8 @@
 <script setup>
-import { useCartStore } from '@/stores/useCartStore';
+import { useProductStore } from '@/stores/useProductStore';
 import { ref, onMounted } from 'vue';
 
-const productStore = useCartStore()
+const productStore = useProductStore()
 const item = ref()
 const itemTags = ref([])
 

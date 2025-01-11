@@ -2,9 +2,9 @@ import { defineStore } from 'pinia'
 import getStoreItems from "@/composables/getStoreItems"
 import getSingleStoreItem from '@/composables/getSingleStoreItem'
 
-export const useCartStore = defineStore('cartStore',{
+export const useProductStore = defineStore('productStore',{
 	state: () =>({
-		products: null,
+		products: null
 	}),
 	actions:{
 		async getProducts(){
