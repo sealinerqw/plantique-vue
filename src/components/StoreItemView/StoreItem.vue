@@ -122,5 +122,6 @@ onMounted(async () =>{
     border-radius: var(--default-radius);
     padding: 5px;
     background: #cacaca;
+    text-wrap: nowrap;
   }
 </style>
