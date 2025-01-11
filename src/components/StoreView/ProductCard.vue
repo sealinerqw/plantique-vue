@@ -3,10 +3,17 @@
   itemId: String,
   itemImage: String,
   itemPrice: Number,
-  itemName: String
+  itemName: String,
+  itemTags: Array
 });
 
 let imageURL = props.itemImage
+
+let tags = props.itemTags
+
+if(tags){
+  tags = tags.split(',').slice(0, 3)
+}
 </script>
 
 <template>
@@ -18,6 +25,11 @@ let imageURL = props.itemImage
         <div class="product_name">{{ props.itemName }}</div>
       </div>
       <button class="black" @click.stop.prevent="">{{ props.itemPrice }} ₽</button>
+    </div>
+    <div class="product_tags">
+      <div class="product_tag" v-for="tag in tags">
+        {{ tag }}
+      </div>
     </div>
   </div>
   </RouterLink>
@@ -42,12 +54,13 @@ let imageURL = props.itemImage
   .product_container:hover{
     transform: scale(1.025);
   }
+
   .product_image{
     border-top-left-radius: calc(var(--default-radius) - 1.5rem);
     border-top-right-radius: calc(var(--default-radius) - 1.5rem);
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: 340px;
   }
   
   .product_info{
@@ -73,9 +86,24 @@ let imageURL = props.itemImage
     font-size: 18px;
   }
 
+  .product_tags{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .product_tag{
+    font-size: 16px;
+    border: 1px solid rgb(92, 92, 92);
+    border-radius: var(--default-radius);
+    text-wrap: nowrap;
+    padding: 5px;
+    background: #cacaca;
+  }
+
   button{
     width: 7rem;
   }
-
-
 </style>
