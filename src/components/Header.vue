@@ -42,7 +42,7 @@ const closeUser = () =>{
       </div> -->
       <button v-if="!authStore.isLoggedIn"><RouterLink to="/login">Login</RouterLink></button>
       <button v-else style="width: 60px; display: flex; align-items: center; justify-content: center;" @click="userToggle"><img src="../assets/img/header/person.png" alt="" class="icon"></button>
-      <button v-if="authStore.isLoggedIn">Cart</button>
+      <button v-if="authStore.isLoggedIn"><RouterLink to="/cart">Cart</RouterLink></button>
     </div>
     <transition name="modal-fade">
       <div class="user_info" v-if='isToggled' v-click-outside="closeUser">
@@ -119,5 +119,9 @@ const closeUser = () =>{
   .modal-fade-enter-from, .modal-fade-leave-to {
     opacity: 0;
     transform: translateY(-20px);
+  }
+
+  a{
+    height: 100%;
   }
 </style>

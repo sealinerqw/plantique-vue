@@ -62,12 +62,12 @@
 .collection_selection{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 5px;
 }
 
 .selection_item{
-  width: 310px;
+  width: 450px;
   height: 300px;
   border: 1px solid black;
   border-radius: 20px;
@@ -81,7 +81,7 @@
 }
 
 .selection_item:hover{
-  width: 470px;
+  width: 600px;
   filter: grayscale(0);
 }
 

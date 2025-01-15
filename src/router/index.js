@@ -6,6 +6,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import StoreView from '@/views/StoreView.vue'
 import NotFound from '@/components/NotFound.vue'
 import StoreItemView from '@/views/StoreItemView.vue'
+import CartView from '@/views/CartView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       name: 'storeitem',
       props: true,
       component: StoreItemView
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: CartView
     },
     // 404 redirect
     {

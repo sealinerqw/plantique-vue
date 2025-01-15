@@ -2,9 +2,14 @@
 import { ref, onMounted} from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
 import { useProductStore } from '@/stores/useProductStore.js';
+import { useCartStore } from '@/stores/useCartStore';
 
 const productStore = useProductStore()
-const productTags = ref([])
+const cartStore = useCartStore()
+
+const addToCart = (product) =>{
+  cartStore.addToCart(product)
+}
 
 onMounted(async () => {
   if(!productStore.products){
@@ -30,6 +35,7 @@ onMounted(async () => {
         :itemPrice="product.price" 
         :itemName="product.name" 
         :itemTags="product.tags"
+        @addToCart="addToCart(product)"
       />
     </div>
     <div v-else>Loading...</div>
@@ -59,7 +65,7 @@ onMounted(async () => {
     width: 100%;
   }
   .store_items{
-    padding: 20px;
+    padding: 30px;
     display: flex;  
     flex-wrap: wrap;
     gap: 20px;
