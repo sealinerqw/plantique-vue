@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 const props = defineProps({
 	product: Object
 })
@@ -7,8 +7,10 @@ const props = defineProps({
 const quantity = ref(props.product.quantity)
 const emit = defineEmits(['updateQuantity', 'removeFromCart'])
 
-watch(quantity, (newQuantity) =>{
-	emit('updateQuantity', props.product.id, newQuantity)
+watchEffect(() => {
+  if (quantity.value !== props.product.quantity) {
+    emit('updateQuantity', quantity.value);
+  }
 })
 
 const increase = () =>{
@@ -33,7 +35,7 @@ const decrease = () =>{
 		<input type="number" v-model="quantity" class="controls_input" min="0">
 		<button class="black increase" @click="increase()">+</button>
 	</div>
-	<div class="product_totalPrice">{{ props.product.price * props.product.quantity }} P</div>
+	<div class="product_totalPrice">{{ props.product.price * quantity }} P</div>
 	<button class="black remove" @click="emit('removeFromCart', props.product.id)">X</button>
 </div>
 </template>
