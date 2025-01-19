@@ -62,6 +62,7 @@ if(tags){
     border-top-left-radius: calc(var(--default-radius) - 1.5rem);
     border-top-right-radius: calc(var(--default-radius) - 1.5rem);
     object-fit: cover;
+    overflow: hidden;
   }
   
   .product_info{
