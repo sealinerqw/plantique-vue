@@ -13,9 +13,9 @@ const updateQuantity = (productID, newQuantity) =>{
 	<div class="cart_container">
 		<h2>Cart</h2>
 		<div class="cart_products">
-			<CartItem v-for="product in cartStore.cart" :key="cartStore.cart.id"
+			<CartItem v-for="product in cartStore.cart" :key="product.id"
 				:product="product"
-				@updateQuantity="updateQuantity"
+				@updateQuantity="(newQuantity) => updateQuantity(product.id, newQuantity)"
 				@removeFromCart = "cartStore.removeFromCart(product.id)"
 			>
 			</CartItem>
