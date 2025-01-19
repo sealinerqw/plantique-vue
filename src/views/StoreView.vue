@@ -1,11 +1,13 @@
 <script setup>
-import { ref, onMounted} from 'vue';
+import { onMounted, ref } from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
+import ProductFilters from '@/components/StoreView/ProductFilters.vue';
 import { useProductStore } from '@/stores/useProductStore.js';
 import { useCartStore } from '@/stores/useCartStore';
 
 const productStore = useProductStore()
 const cartStore = useCartStore()
+let productTags = ref([])
 
 const addToCart = (product) =>{
   cartStore.addToCart(product)
@@ -14,7 +16,14 @@ const addToCart = (product) =>{
 onMounted(async () => {
   if(!productStore.products){
     await productStore.getProducts()
-    console.log(productStore.products)
+
+    productStore.products.forEach((product) =>{
+      product.tags.split(',').forEach((tag) =>{
+        productTags.value.push(tag.trim())
+      })
+    })
+
+    productTags.value = [...new Set(productTags.value)]
   }
 });
 
@@ -24,7 +33,7 @@ onMounted(async () => {
   <div class="store_container">
     <h2>Store</h2>
     <div class="store_filters">
-      todo: filters here
+      <ProductFilters :tags="productTags"></ProductFilters>
     </div>
     <div class="store_items" v-if="productStore.products">
       <ProductCard
@@ -58,12 +67,7 @@ onMounted(async () => {
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .store_filters{
-    width: 200px;
-    height: 100px;
-    background: gray;
-    width: 100%;
-  }
+  
   .store_items{
     padding: 30px;
     display: flex;  
