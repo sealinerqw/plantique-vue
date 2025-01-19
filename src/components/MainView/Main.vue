@@ -18,9 +18,6 @@
         <img src="../../assets/img/mainview/r1-r3.png" alt="plants">
       </div>
       <div class="main_buttons">
-        <div class="buttons-scrollbutton">
-          <img src="../../assets/img/icons/arrow.png" alt="arrow">
-        </div>
         <div class="buttons-shopbutton">
           <button><RouterLink to="store">Shop Tropical Plants</RouterLink></button>
         </div>
@@ -107,18 +104,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: center;
-}
-.buttons-scrollbutton{
-  align-self: flex-end;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 92px;
-  height: 92px;
-  border: 2px solid white;
-  border-radius: 50%;
-  background: transparent;
-  transition: all 0.2s;
+  justify-content: flex-end;
 }
 
 .buttons-scrollbutton:hover{
