@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watch } from 'vue';
 const props = defineProps({
 	product: Object
 })
@@ -7,7 +7,7 @@ const props = defineProps({
 const quantity = ref(props.product.quantity)
 const emit = defineEmits(['updateQuantity', 'removeFromCart'])
 
-watchEffect(() => {
+watch(() => {
   if (quantity.value !== props.product.quantity) {
     emit('updateQuantity', quantity.value);
   }
@@ -70,18 +70,6 @@ const decrease = () =>{
 	width: 100px;
 	text-align: center;
 	caret-color: black;
-}
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-	appearance: textfield;
-	-moz-appearance: textfield;
 }
 
 .decrease{
