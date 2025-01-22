@@ -7,35 +7,49 @@ import { useCartStore } from '@/stores/useCartStore';
 
 const productStore = useProductStore()
 const cartStore = useCartStore()
-let productTags = ref([])
+
+const productTags = ref([])
+const isDataReady = ref(false)
+const minPrice = ref(0)
+const maxPrice = ref(55555)
 
 const addToCart = (product) =>{
   cartStore.addToCart(product)
 }
 
+
 onMounted(async () => {
   if(!productStore.products){
     await productStore.getProducts()
-
-    productStore.products.forEach((product) =>{
-      product.tags.split(',').forEach((tag) =>{
-        productTags.value.push(tag.trim())
-      })
-    })
-
-    productTags.value = [...new Set(productTags.value)]
   }
-});
 
+  minPrice.value = Math.min(...productStore.products.map((product) => product.price))
+  maxPrice.value = Math.max(...productStore.products.map((product) => product.price))
+  productStore.products.forEach((product) =>{
+    product.tags.split(',').forEach((tag) =>{
+      productTags.value.push(tag.trim())
+    })
+  })
+
+  productTags.value = [...new Set(productTags.value)]
+  console.log(`Min price: ${minPrice.value}, max price: ${maxPrice.value}`)
+  isDataReady.value = true
+})
 </script>
 
 <template>
-  <div class="store_container">
+  <div class="store_container" v-if="isDataReady">
     <h2>Store</h2>
     <div class="store_filters">
-      <ProductFilters :tags="productTags"></ProductFilters>
+      <ProductFilters 
+      :tags="productTags"
+      :minPrice="minPrice"
+      :maxPrice="maxPrice"
+      @tagSelect="(selectedTags) => console.log(selectedTags.value)"
+      @priceSelect = "(minPrice, maxPrice) => console.log(`min selectedPrice ${minPrice.value}, max selectedPrice ${maxPrice.value}`)"
+      />
     </div>
-    <div class="store_items" v-if="productStore.products">
+    <div class="store_items">
       <ProductCard
         v-for="product in productStore.products" 
         :key="product.id"
@@ -47,8 +61,8 @@ onMounted(async () => {
         @addToCart="addToCart(product)"
       />
     </div>
-    <div v-else>Loading...</div>
   </div>
+  <div class="store_container" v-else>Loading...</div>
 </template>
 
 <style scoped>
