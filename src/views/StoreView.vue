@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ProductCard from '@/components/StoreView/ProductCard.vue';
 import ProductFilters from '@/components/StoreView/ProductFilters.vue';
 import { useProductStore } from '@/stores/useProductStore.js';
@@ -10,13 +10,31 @@ const cartStore = useCartStore()
 
 const productTags = ref([])
 const isDataReady = ref(false)
+
 const minPrice = ref(0)
 const maxPrice = ref(55555)
+
+const selectedProductTags = ref([])
+const selectedMinPrice = ref(0)
+const selectedMaxPrice = ref(55555)
 
 const addToCart = (product) =>{
   cartStore.addToCart(product)
 }
 
+const updatePriceSelection = (newMin, newMax) =>{
+  selectedMinPrice.value = newMin
+  selectedMaxPrice.value = newMax
+}
+
+const filteredProducts = computed(() =>{
+  return productStore.products?.filter(product => {
+    const priceMatch = product.price >= selectedMinPrice.value && product.price <= selectedMaxPrice.value
+    const tagsMatch = selectedProductTags.value.length === 0 || product.tags.split(',')
+                      .some(tag => selectedProductTags.value.includes(tag.trim()))
+    return priceMatch && tagsMatch
+  }) || []
+})
 
 onMounted(async () => {
   if(!productStore.products){
@@ -25,6 +43,10 @@ onMounted(async () => {
 
   minPrice.value = Math.min(...productStore.products.map((product) => product.price))
   maxPrice.value = Math.max(...productStore.products.map((product) => product.price))
+
+  selectedMinPrice.value = minPrice.value
+  selectedMaxPrice.value = maxPrice.value
+
   productStore.products.forEach((product) =>{
     product.tags.split(',').forEach((tag) =>{
       productTags.value.push(tag.trim())
@@ -45,13 +67,13 @@ onMounted(async () => {
       :tags="productTags"
       :minPrice="minPrice"
       :maxPrice="maxPrice"
-      @tagSelect="(selectedTags) => console.log(selectedTags.value)"
-      @priceSelect = "(minPrice, maxPrice) => console.log(`min selectedPrice ${minPrice.value}, max selectedPrice ${maxPrice.value}`)"
+      @tagSelect="(selectedTags) => selectedProductTags = selectedTags"
+      @priceSelect = "(minPrice, maxPrice) => updatePriceSelection(minPrice, maxPrice)"
       />
     </div>
     <div class="store_items">
       <ProductCard
-        v-for="product in productStore.products" 
+        v-for="product in filteredProducts" 
         :key="product.id"
         :itemId="product.id" 
         :itemImage="product.imageURL" 
