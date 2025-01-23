@@ -17,12 +17,12 @@ const maxSelectedPrice = ref(props.maxPrice)
 const selectTagHandler = (tag) =>{
 	if(selectedTags.value.find((item) => item === tag)){
 		selectedTags.value.splice(selectedTags.value.indexOf(tag), 1)
-		emit('tagSelect', selectedTags)
+		emit('tagSelect', selectedTags.value)
 		console.log(`removed ${tag} from selected tags`)
 	}
 	else{
 		selectedTags.value.push(tag)
-		emit('tagSelect', selectedTags)
+		emit('tagSelect', selectedTags.value)
 		console.log(`added ${tag} to selected tags`)
 	}
 }
@@ -45,7 +45,7 @@ const priceChangeHandler = () =>{
 		maxSelectedPrice.value = minSelectedPrice.value;
 	}
 
-	emit('priceSelect', minSelectedPrice, maxSelectedPrice);
+	emit('priceSelect', minSelectedPrice.value, maxSelectedPrice.value);
 }
 
 </script>
